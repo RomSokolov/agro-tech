@@ -31,7 +31,7 @@
 | UI          | Кастомные компоненты на примитивах Radix           |
 | Анимация    | Framer Motion                                      |
 | Формы       | React Hook Form + валидация Zod                    |
-| База данных | Prisma ORM с SQLite (driver adapter)               |
+| База данных | Prisma ORM + PostgreSQL (driver adapter `pg`)      |
 
 ## Начало работы
 
@@ -54,8 +54,8 @@ npm install
 cp .env.example .env
 ```
 
-Значение `DATABASE_URL` по умолчанию указывает на локальный SQLite-файл и не
-требует изменений для разработки.
+В `.env` укажите `DATABASE_URL` — строку подключения к PostgreSQL. Подойдёт
+бесплатная база Neon (`neon.tech`) или локальный Postgres.
 
 ### База данных
 
@@ -115,10 +115,11 @@ prisma/               Схема и seed-скрипт
 
 ## Деплой в продакшен
 
-SQLite используется для локальной разработки. Для хостинг-деплоя (например,
-Vercel) переключите datasource на PostgreSQL:
+Проект задеплоен на **Netlify**, база данных — **Neon** (PostgreSQL).
 
-1. Измените провайдер `datasource` в `prisma/schema.prisma` на `postgresql`.
-2. Установите `DATABASE_URL` на connection string хостингового Postgres.
-3. Замените SQLite driver adapter в `lib/db.ts` на адаптер Postgres.
-4. Выполните `npm run db:migrate` для новой базы данных и `npm run db:seed`.
+1. Подключите репозиторий к Netlify (Next.js определяется автоматически).
+2. Задайте переменную окружения `DATABASE_URL` со строкой подключения к Neon.
+3. Команда сборки в `netlify.toml` применяет миграции и собирает проект:
+   `npx prisma migrate deploy && npm run build`.
+4. Заполнение базы тестовой техникой выполняется один раз: `npm run db:seed`
+   (локально, с `DATABASE_URL`, указывающим на продакшен-базу).
