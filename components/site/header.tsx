@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Menu, Phone, Tractor, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { SITE } from "@/lib/constants";
@@ -18,10 +18,6 @@ const NAV = [
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
@@ -102,6 +98,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-sand-100"
               >
                 {item.label}
@@ -109,6 +106,7 @@ export function Header() {
             ))}
             <a
               href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`}
+              onClick={() => setOpen(false)}
               className="flex items-center gap-2 px-3 py-3 text-sm font-semibold text-brand-600"
             >
               <Phone className="size-4" />

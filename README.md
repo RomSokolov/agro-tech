@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AgriField — Agricultural Equipment Marketplace
 
-## Getting Started
+A commercial catalog website for a dealer of new and pre-owned agricultural
+machinery (tractors, harvesters, sprayers, seeders, loaders and tillage
+equipment). It includes a marketing home page, a filterable equipment catalog,
+detail pages with lead-capture forms, and an internal leads inbox.
 
-First, run the development server:
+## Features
+
+- **Home page** — hero, equipment categories, featured machines, value
+  proposition and process sections, with on-scroll animations.
+- **Catalog** — server-rendered listing with URL-synced filtering by category,
+  brand, condition, price range and minimum power, plus sorting.
+- **Equipment detail pages** — full specifications, key facts and a
+  "request a quote" form, statically generated per machine.
+- **Lead capture** — validated quote and contact forms persisted to the
+  database through an API route.
+- **Leads inbox** — internal page at `/admin/leads` listing every submission.
+- **Responsive UI** — mobile-first layout with a slide-in filter panel and
+  mobile navigation.
+- **SEO** — per-page metadata, Open Graph tags, `sitemap.xml` and `robots.txt`.
+
+## Tech stack
+
+| Area      | Choice                                            |
+| --------- | ------------------------------------------------- |
+| Framework | Next.js 16 (App Router) + React 19 + TypeScript   |
+| Styling   | Tailwind CSS v4                                   |
+| UI        | Custom components on Radix primitives             |
+| Animation | Framer Motion                                     |
+| Forms     | React Hook Form + Zod validation                  |
+| Database  | Prisma ORM with SQLite (driver adapter)           |
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 20+
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Environment
+
+Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+The default `DATABASE_URL` points at a local SQLite file and needs no changes
+for development.
+
+### Database
+
+Apply the schema and seed the catalog with sample equipment:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+### Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site is available at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script             | Description                                  |
+| ------------------ | -------------------------------------------- |
+| `npm run dev`      | Start the development server                 |
+| `npm run build`    | Production build                             |
+| `npm run start`    | Run the production build                     |
+| `npm run lint`     | Lint the project                             |
+| `npm run db:migrate` | Apply Prisma migrations                    |
+| `npm run db:seed`  | Seed the database with sample equipment      |
+| `npm run db:reset` | Reset and re-migrate the database            |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  catalog/            Catalog listing and equipment detail pages
+  admin/leads/        Internal leads inbox
+  api/leads/          Lead submission endpoint
+  delivery, service, about
+components/
+  home/               Home page sections
+  catalog/            Filter panel and toolbar
+  equipment/          Equipment card and generated visuals
+  forms/              Lead form
+  site/               Header, footer, page header
+  ui/                 Reusable primitives (button, input, select, ...)
+lib/                  Data access, types, validation, constants
+prisma/               Schema and seed script
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Equipment imagery uses generated SVG visuals so the project runs without
+  external assets; real product photos can be added via the `images` field.
+- `/admin/leads` is unauthenticated for demonstration purposes — it would sit
+  behind authentication in production.
 
-## Deploy on Vercel
+## Deploying to production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+SQLite is used for local development. For a hosted deployment (e.g. Vercel),
+switch the datasource to PostgreSQL:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Change the `datasource` provider in `prisma/schema.prisma` to `postgresql`.
+2. Set `DATABASE_URL` to a hosted Postgres connection string.
+3. Replace the SQLite driver adapter in `lib/db.ts` with the Postgres adapter.
+4. Run `npm run db:migrate` against the new database and `npm run db:seed`.

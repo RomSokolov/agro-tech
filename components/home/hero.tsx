@@ -3,7 +3,6 @@ import { ArrowRight, PhoneCall } from "lucide-react";
 import { EquipmentVisual } from "@/components/equipment/equipment-visual";
 import { Reveal } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 const STATS = [
   { value: "20+", label: "Machines in stock" },

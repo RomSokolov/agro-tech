@@ -36,7 +36,13 @@ function Section({
   );
 }
 
-export function CatalogFilters({ filters }: { filters: EquipmentFilters }) {
+export function CatalogFilters({
+  filters,
+  showTitle = true,
+}: {
+  filters: EquipmentFilters;
+  showTitle?: boolean;
+}) {
   const navigate = useFilterNav();
   const activeCount = countActiveFilters(filters);
 
@@ -47,18 +53,24 @@ export function CatalogFilters({ filters }: { filters: EquipmentFilters }) {
   ]);
   const [power, setPower] = useState(filters.minPower ?? 0);
 
-  useEffect(() => {
+  // Re-sync local control state when the URL filters change (e.g. browser
+  // back/forward), adjusting state during render rather than in an effect.
+  const urlKey = [
+    filters.search ?? "",
+    filters.minPrice ?? "",
+    filters.maxPrice ?? "",
+    filters.minPower ?? "",
+  ].join("|");
+  const [syncedKey, setSyncedKey] = useState(urlKey);
+  if (urlKey !== syncedKey) {
+    setSyncedKey(urlKey);
     setSearch(filters.search ?? "");
-  }, [filters.search]);
-  useEffect(() => {
     setPrice([
       filters.minPrice ?? PRICE_BOUNDS.min,
       filters.maxPrice ?? PRICE_BOUNDS.max,
     ]);
-  }, [filters.minPrice, filters.maxPrice]);
-  useEffect(() => {
     setPower(filters.minPower ?? 0);
-  }, [filters.minPower]);
+  }
 
   useEffect(() => {
     if (search === (filters.search ?? "")) return;
@@ -96,19 +108,25 @@ export function CatalogFilters({ filters }: { filters: EquipmentFilters }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between pb-4">
-        <h2 className="text-base font-bold text-ink">Filters</h2>
-        {activeCount > 0 && (
-          <button
-            type="button"
-            onClick={clearAll}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700"
-          >
-            <RotateCcw className="size-3.5" />
-            Clear all ({activeCount})
-          </button>
-        )}
-      </div>
+      {(showTitle || activeCount > 0) && (
+        <div className="flex items-center justify-between pb-4">
+          {showTitle ? (
+            <h2 className="text-base font-bold text-ink">Filters</h2>
+          ) : (
+            <span />
+          )}
+          {activeCount > 0 && (
+            <button
+              type="button"
+              onClick={clearAll}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700"
+            >
+              <RotateCcw className="size-3.5" />
+              Clear all ({activeCount})
+            </button>
+          )}
+        </div>
+      )}
 
       <Section title="Search">
         <div className="relative">

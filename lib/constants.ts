@@ -1,5 +1,8 @@
 import type { SortOption } from "./types";
 
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://agrifield.example";
+
 export const SITE = {
   name: "AgriField",
   tagline: "Farm Machinery & Agricultural Equipment",

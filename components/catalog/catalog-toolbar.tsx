@@ -46,7 +46,7 @@ export function CatalogToolbar({ total, filters }: CatalogToolbarProps) {
                 </Dialog.Close>
               </div>
               <div className="flex-1 overflow-y-auto px-5 py-4">
-                <CatalogFilters filters={filters} />
+                <CatalogFilters filters={filters} showTitle={false} />
               </div>
             </Dialog.Content>
           </Dialog.Portal>
