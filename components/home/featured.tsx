@@ -32,7 +32,7 @@ export function Featured({ equipment }: { equipment: Equipment[] }) {
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {equipment.map((item, index) => (
-          <Reveal key={item.id} delay={(index % 4) * 0.06}>
+          <Reveal key={item.id} delay={(index % 4) * 0.06} className="h-full">
             <EquipmentCard equipment={item} />
           </Reveal>
         ))}

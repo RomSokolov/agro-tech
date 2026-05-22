@@ -23,7 +23,7 @@ export function EquipmentCard({ equipment }: { equipment: Equipment }) {
   return (
     <Link
       href={`/catalog/${equipment.slug}`}
-      className="group flex flex-col overflow-hidden rounded-card border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_18px_40px_-20px_rgba(22,52,32,0.45)]"
+      className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_18px_40px_-20px_rgba(22,52,32,0.45)]"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <EquipmentVisual
@@ -43,8 +43,10 @@ export function EquipmentCard({ equipment }: { equipment: Equipment }) {
         <span className="text-xs font-semibold uppercase tracking-wide text-brand-500">
           {category?.label ?? equipment.category}
         </span>
-        <h3 className="mt-1.5 text-base font-bold text-ink">{equipment.name}</h3>
-        <p className="mt-1.5 line-clamp-2 text-sm text-muted">
+        <h3 className="mt-1.5 line-clamp-2 min-h-12 text-base font-bold text-ink">
+          {equipment.name}
+        </h3>
+        <p className="mt-1 line-clamp-2 text-sm text-muted">
           {equipment.shortDescription}
         </p>
 
