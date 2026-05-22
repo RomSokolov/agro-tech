@@ -69,4 +69,14 @@
       padding-inline: 2rem;
     }
   }
+
+  /* Large page/section headings (h1 and lead h2). */
+  .heading-display {
+    @apply text-3xl font-bold tracking-tight text-ink sm:text-4xl;
+  }
+
+  /* Secondary sub-section headings. */
+  .heading-section {
+    @apply text-2xl font-bold text-ink;
+  }
 }

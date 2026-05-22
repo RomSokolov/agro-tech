@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ClipboardCheck, ShieldCheck, Wrench } from "lucide-react";
 import { PageHeader } from "@/components/site/page-header";
 import { Reveal } from "@/components/motion/reveal";
+import { Card } from "@/components/ui/card";
+import { FeatureCard } from "@/components/ui/feature-card";
 
 export const metadata: Metadata = {
   title: "Service & warranty",
@@ -54,33 +56,28 @@ export default function ServicePage() {
         <div className="grid gap-5 md:grid-cols-3">
           {SERVICES.map((service, index) => (
             <Reveal key={service.title} delay={index * 0.08}>
-              <div className="h-full rounded-card border border-line bg-white p-7">
-                <span className="flex size-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                  <service.icon className="size-6" />
-                </span>
-                <h2 className="mt-5 text-lg font-bold text-ink">
-                  {service.title}
-                </h2>
-                <p className="mt-2 text-sm text-muted">{service.text}</p>
-              </div>
+              <FeatureCard
+                icon={service.icon}
+                title={service.title}
+                text={service.text}
+                headingLevel={2}
+              />
             </Reveal>
           ))}
         </div>
 
         <div className="mt-14">
           <Reveal>
-            <h2 className="text-2xl font-bold text-ink">
-              Frequently asked questions
-            </h2>
+            <h2 className="heading-section">Frequently asked questions</h2>
           </Reveal>
-          <div className="mt-5 divide-y divide-line overflow-hidden rounded-card border border-line bg-white">
+          <Card className="mt-5 divide-y divide-line overflow-hidden">
             {FAQ.map((item) => (
               <div key={item.q} className="p-6">
                 <h3 className="font-bold text-ink">{item.q}</h3>
                 <p className="mt-1.5 text-sm text-muted">{item.a}</p>
               </div>
             ))}
-          </div>
+          </Card>
         </div>
       </section>
     </div>

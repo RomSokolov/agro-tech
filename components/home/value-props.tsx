@@ -1,6 +1,7 @@
 import { Check, ClipboardCheck, Search, Truck } from "lucide-react";
 import { EquipmentVisual } from "@/components/equipment/equipment-visual";
 import { Reveal } from "@/components/motion/reveal";
+import { IconBox } from "@/components/ui/icon-box";
 
 const BENEFITS = [
   "Every machine is workshop-inspected before it is listed",
@@ -44,7 +45,7 @@ export function ValueProps() {
 
         <Reveal delay={0.1}>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="heading-display">
               A straightforward way to buy serious machinery
             </h2>
             <p className="mt-4 text-muted">
@@ -73,9 +74,9 @@ export function ValueProps() {
               <span className="absolute right-6 top-6 text-4xl font-bold text-sand-300">
                 {index + 1}
               </span>
-              <span className="flex size-12 items-center justify-center rounded-xl bg-white text-brand-600 shadow-sm">
+              <IconBox className="bg-white shadow-sm">
                 <step.icon className="size-6" />
-              </span>
+              </IconBox>
               <h3 className="mt-5 text-lg font-bold text-ink">{step.title}</h3>
               <p className="mt-2 text-sm text-muted">{step.text}</p>
             </div>

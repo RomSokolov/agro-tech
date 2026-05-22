@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { ArrowRight, ShieldCheck, Truck, Warehouse } from "lucide-react";
+import { ShieldCheck, Truck, Warehouse } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { FeatureCard } from "@/components/ui/feature-card";
 
 const HIGHLIGHTS = [
   {
@@ -32,20 +32,13 @@ export function Highlights() {
       <div className="grid gap-6 md:grid-cols-3">
         {HIGHLIGHTS.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08}>
-            <div className="flex h-full flex-col rounded-card border border-line bg-white p-7 transition-shadow hover:shadow-md">
-              <span className="flex size-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                <item.icon className="size-6" />
-              </span>
-              <h3 className="mt-5 text-lg font-bold text-ink">{item.title}</h3>
-              <p className="mt-2 flex-1 text-sm text-muted">{item.text}</p>
-              <Link
-                href={item.href}
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:gap-2.5"
-              >
-                {item.cta}
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              text={item.text}
+              link={{ href: item.href, label: item.cta }}
+              className="transition-shadow hover:shadow-md"
+            />
           </Reveal>
         ))}
       </div>

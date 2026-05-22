@@ -17,9 +17,7 @@ export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
           <span className="px-2">/</span>
           <span className="text-ink">{eyebrow ?? title}</span>
         </nav>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-          {title}
-        </h1>
+        <h1 className="heading-display mt-3">{title}</h1>
         {description && (
           <p className="mt-3 max-w-2xl text-muted">{description}</p>
         )}

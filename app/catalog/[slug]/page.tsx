@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Check, Phone } from "lucide-react";
+import { Check, Phone } from "lucide-react";
 import { EquipmentCard } from "@/components/equipment/equipment-card";
 import { EquipmentVisual } from "@/components/equipment/equipment-visual";
 import { LeadForm } from "@/components/forms/lead-form";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { categoryBySlug, formatPrice, SITE } from "@/lib/constants";
 import {
   getAllSlugs,
@@ -94,9 +96,7 @@ export default async function EquipmentDetailPage({
           {category?.label ?? equipment.category}
         </span>
         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            {equipment.name}
-          </h1>
+          <h1 className="heading-display">{equipment.name}</h1>
           <Badge tone={equipment.condition === "new" ? "brand" : "accent"}>
             {equipment.condition === "new" ? "New" : "Used"}
           </Badge>
@@ -144,7 +144,7 @@ export default async function EquipmentDetailPage({
 
         <aside>
           <div className="sticky top-28 space-y-5">
-            <div className="rounded-card border border-line bg-white p-6">
+            <Card className="p-6">
               <p className="text-sm text-muted">Price</p>
               <p className="text-3xl font-bold text-brand-600">
                 {formatPrice(equipment.price)}
@@ -174,9 +174,9 @@ export default async function EquipmentDetailPage({
                 <Phone className="size-4" />
                 {SITE.phone}
               </a>
-            </div>
+            </Card>
 
-            <div className="rounded-card border border-line bg-white p-6">
+            <Card className="p-6">
               <h2 className="text-lg font-bold text-ink">Request a quote</h2>
               <p className="mt-1 text-sm text-muted">
                 Ask about price, finance, trade-in or a demonstration.
@@ -188,7 +188,7 @@ export default async function EquipmentDetailPage({
                   equipmentName={equipment.name}
                 />
               </div>
-            </div>
+            </Card>
           </div>
         </aside>
       </div>
@@ -196,16 +196,12 @@ export default async function EquipmentDetailPage({
       {related.length > 0 && (
         <div className="container-page mt-16">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-ink">
+            <h2 className="heading-section">
               Similar {category?.label.toLowerCase() ?? "equipment"}
             </h2>
-            <Link
-              href={`/catalog?category=${equipment.category}`}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:gap-2.5"
-            >
-              <ArrowLeft className="size-4 rotate-180" />
+            <ArrowLink href={`/catalog?category=${equipment.category}`}>
               View all
-            </Link>
+            </ArrowLink>
           </div>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((item) => (

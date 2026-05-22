@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { EquipmentCard } from "@/components/equipment/equipment-card";
 import { Reveal } from "@/components/motion/reveal";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import type { Equipment } from "@/lib/types";
 
 export function Featured({ equipment }: { equipment: Equipment[] }) {
@@ -12,21 +11,13 @@ export function Featured({ equipment }: { equipment: Equipment[] }) {
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Featured machines
-            </h2>
+            <h2 className="heading-display">Featured machines</h2>
             <p className="mt-3 text-muted">
               Hand-picked equipment from our current stock — ready for
               inspection, demo or immediate delivery.
             </p>
           </div>
-          <Link
-            href="/catalog"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:gap-2.5"
-          >
-            View all equipment
-            <ArrowRight className="size-4" />
-          </Link>
+          <ArrowLink href="/catalog">View all equipment</ArrowLink>
         </div>
       </Reveal>
 

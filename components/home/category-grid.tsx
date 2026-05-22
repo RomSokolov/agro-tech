@@ -10,9 +10,7 @@ export function CategoryGrid({ counts }: { counts: Record<string, number> }) {
       <div className="container-page">
         <Reveal>
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Browse by equipment type
-            </h2>
+            <h2 className="heading-display">Browse by equipment type</h2>
             <p className="mt-3 text-muted">
               Whatever stage of the season you are working, start from the
               category that fits the job.

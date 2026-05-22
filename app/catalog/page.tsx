@@ -4,6 +4,7 @@ import { PackageOpen } from "lucide-react";
 import { CatalogFilters } from "@/components/catalog/catalog-filters";
 import { CatalogToolbar } from "@/components/catalog/catalog-toolbar";
 import { EquipmentCard } from "@/components/equipment/equipment-card";
+import { Card } from "@/components/ui/card";
 import { categoryBySlug } from "@/lib/constants";
 import { queryEquipment } from "@/lib/equipment";
 import { parseFilters, type RawSearchParams } from "@/lib/filters";
@@ -36,7 +37,7 @@ export default async function CatalogPage({
             <span className="px-2">/</span>
             <span className="text-ink">Catalog</span>
           </nav>
-          <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h1 className="heading-display mt-3">
             {category ? category.label : "Equipment catalog"}
           </h1>
           <p className="mt-2 max-w-2xl text-muted">
@@ -49,9 +50,9 @@ export default async function CatalogPage({
 
       <div className="container-page grid gap-8 py-10 lg:grid-cols-[260px_1fr] lg:py-12">
         <aside className="hidden lg:block">
-          <div className="sticky top-28 rounded-card border border-line bg-white p-5">
+          <Card className="sticky top-28 p-5">
             <CatalogFilters filters={filters} />
-          </div>
+          </Card>
         </aside>
 
         <div>

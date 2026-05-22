@@ -4,6 +4,7 @@ import { EquipmentVisual } from "@/components/equipment/equipment-visual";
 import { LeadForm } from "@/components/forms/lead-form";
 import { PageHeader } from "@/components/site/page-header";
 import { Reveal } from "@/components/motion/reveal";
+import { IconBox } from "@/components/ui/icon-box";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -57,7 +58,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <div>
-              <h2 className="text-2xl font-bold text-ink sm:text-3xl">
+              <h2 className="heading-section sm:text-3xl">
                 Machinery you can trust, from people who know it
               </h2>
               <p className="mt-4 text-muted">
@@ -90,9 +91,7 @@ export default function AboutPage() {
       <section className="border-t border-line bg-sand-50 py-14 lg:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold text-ink sm:text-3xl">
-              Get in touch
-            </h2>
+            <h2 className="heading-section sm:text-3xl">Get in touch</h2>
             <p className="mt-3 text-muted">
               Have a question about a machine, delivery or finance? Send us a
               message and our team will get back to you within one business
@@ -101,9 +100,9 @@ export default function AboutPage() {
             <ul className="mt-8 space-y-5">
               {CONTACT.map((item) => (
                 <li key={item.label} className="flex items-start gap-3.5">
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-white text-brand-600 shadow-sm">
+                  <IconBox className="size-10 rounded-lg bg-white shadow-sm">
                     <item.icon className="size-5" />
-                  </span>
+                  </IconBox>
                   <div>
                     <p className="text-xs uppercase tracking-wide text-muted">
                       {item.label}
