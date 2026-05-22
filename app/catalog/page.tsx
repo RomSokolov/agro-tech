@@ -50,7 +50,7 @@ export default async function CatalogPage({
 
       <div className="container-page grid gap-8 py-10 lg:grid-cols-[260px_1fr] lg:py-12">
         <aside className="hidden lg:block">
-          <Card className="sticky top-28 p-5">
+          <Card className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto p-5">
             <CatalogFilters filters={filters} />
           </Card>
         </aside>
